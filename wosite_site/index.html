@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ヲシテ変換ツール</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 2em; }
+    .output img { height: 64px; margin: 2px; }
+    input, button { font-size: 1.2em; padding: 0.3em; margin: 0.5em; }
+  </style>
+</head>
+<body>
+  <h1>ヲシテ変換ツール</h1>
+  <input type="text" id="kanaInput" placeholder="かなを入力してください" />
+  <button onclick="convert()">変換</button>
+  <div class="output" id="outputArea"></div>
+
+  <script>
+    const kanaToFile = {
+      "あ": "a", "い": "i", "う": "u", "え": "e", "お": "o",
+      "か": "ka", "き": "ki", "く": "ku", "け": "ke", "こ": "ko",
+      "さ": "sa", "し": "si", "す": "su", "せ": "se", "そ": "so",
+      "た": "ta", "ち": "ti", "つ": "tu", "て": "te", "と": "to",
+      "な": "na", "に": "ni", "ぬ": "nu", "ね": "ne", "の": "no",
+      "は": "ha", "ひ": "hi", "ふ": "hu", "へ": "he", "ほ": "ho",
+      "ま": "ma", "み": "mi", "む": "mu", "め": "me", "も": "mo",
+      "や": "ya", "ゆ": "yu", "よ": "yo",
+      "ら": "ra", "り": "ri", "る": "ru", "れ": "re", "ろ": "ro",
+      "わ": "wa", "を": "wo", "ん": "n"
+    };
+
+    function convert() {
+      const input = document.getElementById("kanaInput").value;
+      const output = document.getElementById("outputArea");
+      output.innerHTML = "";
+
+      for (const char of input) {
+        const fileKey = kanaToFile[char];
+        if (fileKey) {
+          const img = document.createElement("img");
+          img.src = "./images/wosite_" + fileKey + ".png";
+          img.alt = char;
+          output.appendChild(img);
+        } else {
+          const span = document.createElement("span");
+          span.textContent = char;
+          output.appendChild(span);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
